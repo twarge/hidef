@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="inside">
+      <rect x="94" y="94" width="836" height="836" rx="172" ry="172"/>
+    </clipPath>
+  </defs>
+
+  <rect width="1024" height="1024" fill="#ffffff"/>
+  <rect x="64" y="64" width="896" height="896" rx="196" ry="196" fill="#ffffff"/>
+
+  <g clip-path="url(#inside)">
+    <rect x="78" y="78" width="868" height="868" fill="#f8f8f4"/>
+    <g fill="none" stroke="#111111" stroke-opacity="0.22" stroke-width="2">
+      <path d="M132 196 H892"/>
+      <path d="M132 292 H892"/>
+      <path d="M132 388 H892"/>
+      <path d="M132 484 H892"/>
+      <path d="M132 580 H892"/>
+      <path d="M132 676 H892"/>
+      <path d="M132 772 H892"/>
+      <path d="M208 130 V894"/>
+      <path d="M320 130 V894"/>
+      <path d="M432 130 V894"/>
+      <path d="M544 130 V894"/>
+      <path d="M656 130 V894"/>
+      <path d="M768 130 V894"/>
+    </g>
+
+    <g font-family="Menlo, Monaco, 'SF Mono', monospace" font-size="22" font-weight="700" letter-spacing="1.5" fill="#111111" opacity="0.72">
+      <text x="126" y="160">0x48 0x35 :: H5D_CHUNK[1F] {A9 C0 7E 03} /root</text>
+      <text x="146" y="222">idx:0042 rank=07 dims=[4096,1024] B8 F1 E0 2D</text>
+      <text x="118" y="284">H5O token 91:7A:D3:09 :: filter=zlib shuffle=YES</text>
+      <text x="158" y="346">7F 45 4C 46 00 00 08 12 99 A0 FF 03 17 4B</text>
+      <text x="128" y="408">dataset /scan/raw/signal [[[ 8C 3E 11 0A 5D ]]</text>
+      <text x="172" y="470">chunk map { 0:0:19 }  C1 B2 9D 70 E8 05 5A</text>
+      <text x="112" y="532">H5T_IEEE_F64LE  stride=8  offset=0x0000A11C</text>
+      <text x="156" y="594">attrs: CALIB 0xA0 0x22 0x6B 0xF0 0x0D EOF?</text>
+      <text x="126" y="656">grid[27,93] :: 01100100 01001000 00110101</text>
+      <text x="176" y="718">link-&gt;/deep/object/table  5E 2A B0 71 09 77</text>
+      <text x="118" y="780">H5S_SELECT_HYPERSLAB start={0,0} count={32,200}</text>
+      <text x="150" y="842">checksum? 16 F7 80 CC 02 44 19 AE 00 35 H5</text>
+    </g>
+
+    <g fill="#111111" opacity="0.34">
+      <rect x="142" y="188" width="62" height="12" rx="3"/>
+      <rect x="806" y="248" width="88" height="12" rx="3"/>
+      <rect x="128" y="364" width="110" height="12" rx="3"/>
+      <rect x="780" y="426" width="92" height="12" rx="3"/>
+      <rect x="154" y="612" width="78" height="12" rx="3"/>
+      <rect x="816" y="748" width="72" height="12" rx="3"/>
+      <circle cx="258" cy="248" r="7"/>
+      <circle cx="742" cy="364" r="7"/>
+      <circle cx="286" cy="620" r="7"/>
+      <circle cx="706" cy="824" r="7"/>
+    </g>
+  </g>
+
+  <g fill="none" stroke="#000000" stroke-linecap="square">
+    <rect x="64" y="64" width="896" height="896" rx="196" ry="196" stroke-width="58"/>
+    <path d="M512 40 V136" stroke-width="32"/>
+    <path d="M512 888 V984" stroke-width="32"/>
+    <path d="M40 512 H136" stroke-width="32"/>
+    <path d="M888 512 H984" stroke-width="32"/>
+    <path d="M248 68 V128" stroke-width="22"/>
+    <path d="M776 68 V128" stroke-width="22"/>
+    <path d="M248 896 V956" stroke-width="22"/>
+    <path d="M776 896 V956" stroke-width="22"/>
+    <path d="M68 248 H128" stroke-width="22"/>
+    <path d="M896 248 H956" stroke-width="22"/>
+    <path d="M68 776 H128" stroke-width="22"/>
+    <path d="M896 776 H956" stroke-width="22"/>
+  </g>
+
+  <g font-family="Menlo, Monaco, 'SF Mono', monospace" font-weight="900" text-anchor="middle">
+    <text x="512" y="620" font-size="324" fill="#ffffff" stroke="#ffffff" stroke-width="34" paint-order="stroke">H5</text>
+    <text x="512" y="620" font-size="324" fill="#000000">H5</text>
+  </g>
+</svg>

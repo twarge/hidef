@@ -1,0 +1,4 @@
+[submodule "Vendor/hdf5"]
+	path = Vendor/hdf5
+	url = https://github.com/HDFGroup/hdf5.git
+	shallow = true

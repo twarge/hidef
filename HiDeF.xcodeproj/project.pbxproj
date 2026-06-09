@@ -1,0 +1,511 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 60;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		00000000000000000000B001 /* HDF5File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000F001 /* HDF5File.swift */; };
+		00000000000000000000B002 /* HDF5Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000F002 /* HDF5Models.swift */; };
+		00000000000000000000B003 /* HiDeFHDF5.c in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000F003 /* HiDeFHDF5.c */; };
+		00000000000000000000B005 /* HDFDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000F007 /* HDFDocument.swift */; };
+		00000000000000000000B008 /* HDF5.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00000000000000000000F017 /* HDF5.xcframework */; };
+		00000000000000000000B009 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000F020 /* Assets.xcassets */; };
+		00000000000000000000B021 /* HDFDocumentSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000F024 /* HDFDocumentSidebarView.swift */; };
+		00000000000000000000B023 /* ThirdPartyLicenses.txt in Resources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000F025 /* ThirdPartyLicenses.txt */; };
+		00000000000000000000B024 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000F026 /* LICENSE */; };
+		00000000000000000000B026 /* Demo/demo.h5 in Resources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000F027 /* Demo/demo.h5 */; };
+		00000000000000000000B028 /* HiDeFApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000F028 /* HiDeFApp.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		00000000000000000000F001 /* HDF5File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDF5File.swift; sourceTree = "<group>"; };
+		00000000000000000000F002 /* HDF5Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDF5Models.swift; sourceTree = "<group>"; };
+		00000000000000000000F003 /* HiDeFHDF5.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = HiDeFHDF5.c; sourceTree = "<group>"; };
+		00000000000000000000F004 /* HiDeFHDF5.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HiDeFHDF5.h; sourceTree = "<group>"; };
+		00000000000000000000F005 /* HiDeF-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HiDeF-Bridging-Header.h"; sourceTree = "<group>"; };
+		00000000000000000000F007 /* HDFDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDFDocument.swift; sourceTree = "<group>"; };
+		00000000000000000000F015 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		00000000000000000000F016 /* iOS Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "iOS Info.plist"; path = iOS/Info.plist; sourceTree = "<group>"; };
+		00000000000000000000F017 /* HDF5.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = HDF5.xcframework; sourceTree = "<group>"; };
+		00000000000000000000F018 /* HiDeF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HiDeF.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		00000000000000000000F020 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		00000000000000000000F021 /* HiDeFIcon.svg */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = HiDeFIcon.svg; sourceTree = "<group>"; };
+		00000000000000000000F022 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>"; };
+		00000000000000000000F024 /* HDFDocumentSidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDFDocumentSidebarView.swift; sourceTree = "<group>"; };
+		00000000000000000000F025 /* ThirdPartyLicenses.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ThirdPartyLicenses.txt; sourceTree = "<group>"; };
+		00000000000000000000F026 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		00000000000000000000F027 /* Demo/demo.h5 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Demo/demo.h5; sourceTree = "<group>"; };
+		00000000000000000000F028 /* HiDeFApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiDeFApp.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		00000000000000000000P002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00000000000000000000B008 /* HDF5.xcframework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		00000000000000000000G001 = {
+			isa = PBXGroup;
+			children = (
+				00000000000000000000F026 /* LICENSE */,
+				00000000000000000000G002 /* Sources */,
+				00000000000000000000G030 /* Resources */,
+				00000000000000000000G040 /* Vendor */,
+				00000000000000000000G050 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		00000000000000000000G002 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				00000000000000000000G010 /* HDF5Shim */,
+				00000000000000000000G020 /* HiDeF */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		00000000000000000000G010 /* HDF5Shim */ = {
+			isa = PBXGroup;
+			children = (
+				00000000000000000000F003 /* HiDeFHDF5.c */,
+				00000000000000000000G011 /* include */,
+			);
+			path = HDF5Shim;
+			sourceTree = "<group>";
+		};
+		00000000000000000000G011 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				00000000000000000000F004 /* HiDeFHDF5.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		00000000000000000000G020 /* HiDeF */ = {
+			isa = PBXGroup;
+			children = (
+				00000000000000000000F005 /* HiDeF-Bridging-Header.h */,
+				00000000000000000000F028 /* HiDeFApp.swift */,
+				00000000000000000000F007 /* HDFDocument.swift */,
+				00000000000000000000G021 /* Model */,
+				00000000000000000000G024 /* SwiftUI */,
+			);
+			path = HiDeF;
+			sourceTree = "<group>";
+		};
+		00000000000000000000G021 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				00000000000000000000F001 /* HDF5File.swift */,
+				00000000000000000000F002 /* HDF5Models.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		00000000000000000000G024 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				00000000000000000000F024 /* HDFDocumentSidebarView.swift */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		00000000000000000000G030 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				00000000000000000000F020 /* Assets.xcassets */,
+				00000000000000000000F022 /* AppIcon.icns */,
+				00000000000000000000G031 /* IconSource */,
+				00000000000000000000F015 /* Info.plist */,
+				00000000000000000000F016 /* iOS Info.plist */,
+				00000000000000000000F025 /* ThirdPartyLicenses.txt */,
+				00000000000000000000F027 /* Demo/demo.h5 */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		00000000000000000000G031 /* IconSource */ = {
+			isa = PBXGroup;
+			children = (
+				00000000000000000000F021 /* HiDeFIcon.svg */,
+			);
+			path = IconSource;
+			sourceTree = "<group>";
+		};
+		00000000000000000000G040 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				00000000000000000000G041 /* Build */,
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
+		00000000000000000000G041 /* Build */ = {
+			isa = PBXGroup;
+			children = (
+				00000000000000000000F017 /* HDF5.xcframework */,
+			);
+			path = Build;
+			sourceTree = "<group>";
+		};
+		00000000000000000000G050 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				00000000000000000000F018 /* HiDeF.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		00000000000000000000T001 /* HiDeF */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 00000000000000000000C100 /* Build configuration list for PBXNativeTarget "HiDeF" */;
+			buildPhases = (
+				00000000000000000000P001 /* Sources */,
+				00000000000000000000P002 /* Frameworks */,
+				00000000000000000000P003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HiDeF;
+			productName = HiDeF;
+			productReference = 00000000000000000000F018 /* HiDeF.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		00000000000000000000PR01 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2600;
+				LastUpgradeCheck = 2640;
+				TargetAttributes = {
+					00000000000000000000T001 = {
+						CreatedOnToolsVersion = 26.4;
+					};
+				};
+			};
+			buildConfigurationList = 00000000000000000000C000 /* Build configuration list for PBXProject "HiDeF" */;
+			compatibilityVersion = "Xcode 15.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 00000000000000000000G001;
+			productRefGroup = 00000000000000000000G050 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				00000000000000000000T001 /* HiDeF */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		00000000000000000000P003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00000000000000000000B009 /* Assets.xcassets in Resources */,
+				00000000000000000000B023 /* ThirdPartyLicenses.txt in Resources */,
+				00000000000000000000B024 /* LICENSE in Resources */,
+				00000000000000000000B026 /* Demo/demo.h5 in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		00000000000000000000P001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00000000000000000000B028 /* HiDeFApp.swift in Sources */,
+				00000000000000000000B005 /* HDFDocument.swift in Sources */,
+				00000000000000000000B001 /* HDF5File.swift in Sources */,
+				00000000000000000000B002 /* HDF5Models.swift in Sources */,
+				00000000000000000000B021 /* HDFDocumentSidebarView.swift in Sources */,
+				00000000000000000000B003 /* HiDeFHDF5.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		00000000000000000000C001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_C_LANGUAGE_STANDARD = gnu17;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		00000000000000000000C002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_C_LANGUAGE_STANDARD = gnu17;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		00000000000000000000C101 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 6MFC6VKTVX;
+				"EXECUTABLE_NAME[sdk=iphoneos*]" = hidef;
+				"EXECUTABLE_NAME[sdk=iphonesimulator*]" = hidef;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor/Build",
+				);
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GENERATE_INFOPLIST_FILE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Sources/HDF5Shim/include",
+					"$(PROJECT_DIR)/Vendor/Build/HDF5.xcframework/macos-arm64_x86_64/Headers",
+					"$(PROJECT_DIR)/Vendor/Build/HDF5.xcframework/ios-arm64/Headers",
+					"$(PROJECT_DIR)/Vendor/Build/HDF5.xcframework/ios-arm64_x86_64-simulator/Headers",
+				);
+				INFOPLIST_FILE = Resources/Info.plist;
+				"INFOPLIST_FILE[sdk=iphoneos*]" = Resources/iOS/Info.plist;
+				"INFOPLIST_FILE[sdk=iphonesimulator*]" = Resources/iOS/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = HiDeF;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=iphoneos*]" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-ffile-prefix-map=$(PROJECT_DIR)=.",
+					"-fdebug-prefix-map=$(PROJECT_DIR)=.",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-lz",
+				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -debug-prefix-map $(PROJECT_DIR)=.";
+				PRODUCT_BUNDLE_IDENTIFIER = com.twarge.hidef;
+				PRODUCT_MODULE_NAME = hidef;
+				PRODUCT_NAME = HiDeF;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = auto;
+				STRIP_INSTALLED_PRODUCT = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Sources/HiDeF/HiDeF-Bridging-Header.h";
+				SWIFT_SERIALIZE_DEBUGGING_OPTIONS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		00000000000000000000C102 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 6MFC6VKTVX;
+				"EXECUTABLE_NAME[sdk=iphoneos*]" = hidef;
+				"EXECUTABLE_NAME[sdk=iphonesimulator*]" = hidef;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor/Build",
+				);
+				GENERATE_INFOPLIST_FILE = NO;
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Sources/HDF5Shim/include",
+					"$(PROJECT_DIR)/Vendor/Build/HDF5.xcframework/macos-arm64_x86_64/Headers",
+					"$(PROJECT_DIR)/Vendor/Build/HDF5.xcframework/ios-arm64/Headers",
+					"$(PROJECT_DIR)/Vendor/Build/HDF5.xcframework/ios-arm64_x86_64-simulator/Headers",
+				);
+				INFOPLIST_FILE = Resources/Info.plist;
+				"INFOPLIST_FILE[sdk=iphoneos*]" = Resources/iOS/Info.plist;
+				"INFOPLIST_FILE[sdk=iphonesimulator*]" = Resources/iOS/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = HiDeF;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=iphoneos*]" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-ffile-prefix-map=$(PROJECT_DIR)=.",
+					"-fdebug-prefix-map=$(PROJECT_DIR)=.",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-lz",
+				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -debug-prefix-map $(PROJECT_DIR)=.";
+				PRODUCT_BUNDLE_IDENTIFIER = com.twarge.hidef;
+				PRODUCT_MODULE_NAME = hidef;
+				PRODUCT_NAME = HiDeF;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = auto;
+				STRIP_INSTALLED_PRODUCT = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Sources/HiDeF/HiDeF-Bridging-Header.h";
+				SWIFT_SERIALIZE_DEBUGGING_OPTIONS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		00000000000000000000C000 /* Build configuration list for PBXProject "HiDeF" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00000000000000000000C001 /* Debug */,
+				00000000000000000000C002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		00000000000000000000C100 /* Build configuration list for PBXNativeTarget "HiDeF" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00000000000000000000C101 /* Debug */,
+				00000000000000000000C102 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 00000000000000000000PR01 /* Project object */;
+}
