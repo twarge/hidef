@@ -518,7 +518,7 @@ if [[ "$BUILD_MACOS" -eq 1 ]]; then
 	VERSION="$(plist_value CFBundleShortVersionString)"
 	PACKAGE_ID="$BUNDLE_ID.pkg"
 
-	sign_bundle "$APP_DIR"
+	sign_bundle "$APP_DIR" --entitlements "$ROOT_DIR/Resources/HiDeF.entitlements"
 	codesign --verify --strict --verbose=2 "$APP_DIR"
 
 	mkdir -p "$DIST_DIR"

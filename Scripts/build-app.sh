@@ -96,7 +96,8 @@ fi
 printf 'APPL????' > "$CONTENTS_DIR/PkgInfo"
 
 if [ "${HIDEF_SKIP_CODESIGN:-0}" != "1" ]; then
-    xcrun codesign --force --sign "$CODESIGN_IDENTITY" --timestamp=none "$APP_DIR"
+    xcrun codesign --force --sign "$CODESIGN_IDENTITY" --timestamp=none \
+        --entitlements "$ROOT_DIR/Resources/HiDeF.entitlements" "$APP_DIR"
 fi
 
 echo "Built $APP_DIR"
