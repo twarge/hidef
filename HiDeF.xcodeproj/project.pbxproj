@@ -355,7 +355,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 6MFC6VKTVX;
+				DEVELOPMENT_TEAM = 257KW9ZJFP;
 				"EXECUTABLE_NAME[sdk=iphoneos*]" = hidef;
 				"EXECUTABLE_NAME[sdk=iphonesimulator*]" = hidef;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -363,7 +363,7 @@
 					"$(PROJECT_DIR)/Vendor/Build",
 				);
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GENERATE_INFOPLIST_FILE = NO;
+				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/Sources/HDF5Shim/include",
 					"$(PROJECT_DIR)/Vendor/Build/HDF5.xcframework/macos-arm64_x86_64/Headers",
@@ -400,7 +400,7 @@
 					"-lz",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -debug-prefix-map $(PROJECT_DIR)=.";
-				PRODUCT_BUNDLE_IDENTIFIER = com.twarge.hidef;
+				PRODUCT_BUNDLE_IDENTIFIER = com.twarge.app.hidef;
 				PRODUCT_MODULE_NAME = hidef;
 				PRODUCT_NAME = HiDeF;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -426,14 +426,14 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 6MFC6VKTVX;
+				DEVELOPMENT_TEAM = 257KW9ZJFP;
 				"EXECUTABLE_NAME[sdk=iphoneos*]" = hidef;
 				"EXECUTABLE_NAME[sdk=iphonesimulator*]" = hidef;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Vendor/Build",
 				);
-				GENERATE_INFOPLIST_FILE = NO;
+				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/Sources/HDF5Shim/include",
 					"$(PROJECT_DIR)/Vendor/Build/HDF5.xcframework/macos-arm64_x86_64/Headers",
@@ -470,7 +470,7 @@
 					"-lz",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -debug-prefix-map $(PROJECT_DIR)=.";
-				PRODUCT_BUNDLE_IDENTIFIER = com.twarge.hidef;
+				PRODUCT_BUNDLE_IDENTIFIER = com.twarge.app.hidef;
 				PRODUCT_MODULE_NAME = hidef;
 				PRODUCT_NAME = HiDeF;
 				PROVISIONING_PROFILE_SPECIFIER = "";
