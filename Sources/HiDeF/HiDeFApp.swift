@@ -126,11 +126,12 @@ private struct HDFMacDocumentCommands: Commands {
     }
 }
 
+@MainActor
 private enum HDFAboutPanel {
     static func show() {
         NSApplication.shared.orderFrontStandardAboutPanel(options: [
             .applicationName: HDFAppBrand.name,
-            .applicationVersion: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "0.1.0",
+            .applicationVersion: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "1.0",
             .version: Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String ?? "1",
             .credits: licenseCredits()
         ])

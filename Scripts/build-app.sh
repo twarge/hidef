@@ -31,7 +31,7 @@ COMMON_CFLAGS=(
 )
 
 COMMON_SWIFT_FLAGS=(
-    -swift-version 5
+    -swift-version 6
     -O
     -module-name hidef
     -I "$ROOT_DIR/Sources/HDF5Shim/include"
@@ -81,6 +81,12 @@ xcrun swiftc "${COMMON_SWIFT_FLAGS[@]}" \
     -o "$MACOS_DIR/HiDeF"
 
 cp "$ROOT_DIR/Resources/Info.plist" "$CONTENTS_DIR/Info.plist"
+# The source plist uses $(PRODUCT_BUNDLE_IDENTIFIER), which Xcode expands at build time.
+# This dev/CI build does its own copy, so resolve it from the project (single source of truth).
+BUNDLE_ID="${HIDEF_BUNDLE_ID:-$(awk -F' = ' '/PRODUCT_BUNDLE_IDENTIFIER/ { gsub(/[ ;]/, "", $2); print $2; exit }' "$ROOT_DIR/HiDeF.xcodeproj/project.pbxproj")}"
+if [ -n "$BUNDLE_ID" ]; then
+    /usr/libexec/PlistBuddy -c "Set :CFBundleIdentifier $BUNDLE_ID" "$CONTENTS_DIR/Info.plist"
+fi
 if [ -f "$ROOT_DIR/Resources/AppIcon.icns" ]; then
     cp "$ROOT_DIR/Resources/AppIcon.icns" "$RESOURCES_DIR/AppIcon.icns"
 fi

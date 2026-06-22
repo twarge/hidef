@@ -396,7 +396,7 @@ final class HDFDocumentViewModel: ObservableObject {
         node.isLoading = false
     }
 
-    private func perform<Value>(_ work: @escaping () throws -> Value) async throws -> Value {
+    private func perform<Value>(_ work: @escaping @Sendable () throws -> Value) async throws -> Value {
         try await withCheckedThrowingContinuation { continuation in
             DispatchQueue.global(qos: .userInitiated).async {
                 do {
@@ -834,7 +834,7 @@ private final class HDFDatasetColumnSidebarViewModel: ObservableObject {
         isLoading = false
     }
 
-    private func perform<Value>(_ work: @escaping () throws -> Value) async throws -> Value {
+    private func perform<Value>(_ work: @escaping @Sendable () throws -> Value) async throws -> Value {
         try await withCheckedThrowingContinuation { continuation in
             DispatchQueue.global(qos: .utility).async {
                 do {
@@ -1042,7 +1042,7 @@ private final class HDFObjectInfoViewModel: ObservableObject {
         isLoading = false
     }
 
-    private func perform<Value>(_ work: @escaping () throws -> Value) async throws -> Value {
+    private func perform<Value>(_ work: @escaping @Sendable () throws -> Value) async throws -> Value {
         try await withCheckedThrowingContinuation { continuation in
             DispatchQueue.global(qos: .userInitiated).async {
                 do {
@@ -1692,7 +1692,7 @@ private final class HDFDatasetTableViewModel: ObservableObject {
         }
     }
 
-    private func perform<Value>(_ work: @escaping () throws -> Value) async throws -> Value {
+    private func perform<Value>(_ work: @escaping @Sendable () throws -> Value) async throws -> Value {
         try await withCheckedThrowingContinuation { continuation in
             DispatchQueue.global(qos: .userInitiated).async {
                 do {
@@ -2003,7 +2003,7 @@ private final class HDFDatasetPlotViewModel: ObservableObject {
         }
     }
 
-    private func perform<Value>(_ work: @escaping () throws -> Value) async throws -> Value {
+    private func perform<Value>(_ work: @escaping @Sendable () throws -> Value) async throws -> Value {
         try await withCheckedThrowingContinuation { continuation in
             DispatchQueue.global(qos: .userInitiated).async {
                 do {
@@ -2655,6 +2655,7 @@ private struct HDFPlotViewport: Equatable {
     var yRange: HDFPlotRange?
 }
 
+@MainActor
 private final class HDFPlotUndoTarget: ObservableObject {
     /// A private undo manager for plot zoom/pan. Using this instead of the document's
     /// undo manager keeps zooming from marking this read-only document as "edited".
