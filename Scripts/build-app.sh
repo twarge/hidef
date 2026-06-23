@@ -7,7 +7,7 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 BUILD_DIR="$ROOT_DIR/build"
 INTERMEDIATES="$BUILD_DIR/intermediates"
-APP_DIR="$BUILD_DIR/HiDeF.app"
+APP_DIR="$BUILD_DIR/HighDeF.app"
 CONTENTS_DIR="$APP_DIR/Contents"
 MACOS_DIR="$CONTENTS_DIR/MacOS"
 RESOURCES_DIR="$CONTENTS_DIR/Resources"
@@ -16,7 +16,7 @@ XCFRAMEWORK="$ROOT_DIR/Vendor/Build/HDF5.xcframework"
 CODESIGN_IDENTITY="${HIDEF_CODE_SIGN_IDENTITY:--}"
 
 mkdir -p "$INTERMEDIATES" "$MACOS_DIR" "$RESOURCES_DIR"
-rm -f "$MACOS_DIR/HiDeF" "$INTERMEDIATES/HiDeFHDF5.o"
+rm -f "$MACOS_DIR/HighDeF" "$INTERMEDIATES/HiDeFHDF5.o"
 mkdir -p "$INTERMEDIATES/ModuleCache"
 
 SWIFT_SOURCES=()
@@ -78,7 +78,7 @@ xcrun swiftc "${COMMON_SWIFT_FLAGS[@]}" \
     "${LINK_INPUTS[@]}" \
     -framework AppKit \
     -framework SwiftUI \
-    -o "$MACOS_DIR/HiDeF"
+    -o "$MACOS_DIR/HighDeF"
 
 cp "$ROOT_DIR/Resources/Info.plist" "$CONTENTS_DIR/Info.plist"
 # The source plist uses $(PRODUCT_BUNDLE_IDENTIFIER), which Xcode expands at build time.

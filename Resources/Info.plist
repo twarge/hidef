@@ -31,7 +31,7 @@
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
-	<string>HiDeF</string>
+	<string>HighDeF</string>
 	<key>CFBundleIconFile</key>
 	<string>AppIcon</string>
 	<key>CFBundleIdentifier</key>

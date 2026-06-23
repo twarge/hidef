@@ -2,7 +2,7 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-APP_NAME="HiDeF"
+APP_NAME="HighDeF"
 CONFIGURATION="${CONFIGURATION:-release}"
 INFO_PLIST="$ROOT_DIR/Resources/Info.plist"
 IOS_INFO_PLIST="$ROOT_DIR/Resources/iOS/Info.plist"
@@ -45,20 +45,20 @@ usage() {
 	cat <<USAGE
 Usage: Scripts/release-app.sh [options]
 
-Builds, Developer ID signs, notarizes, staples, and packages HiDeF for direct macOS distribution.
+Builds, Developer ID signs, notarizes, staples, and packages HighDeF for direct macOS distribution.
 It also archives and exports the iOS app as an App Store Connect IPA by default.
 
 Default outputs:
-  build/distribution/HiDeF-macOS.zip
-  build/distribution/HiDeF-macOS.pkg
-  build/distribution/HiDeF-macOS.dmg
-  build/distribution/HiDeF-iOS.ipa
+  build/distribution/HighDeF-macOS.zip
+  build/distribution/HighDeF-macOS.pkg
+  build/distribution/HighDeF-macOS.dmg
+  build/distribution/HighDeF-iOS.ipa
 
 Options:
   --sign-identity NAME       Developer ID Application identity. Defaults to the first valid matching keychain identity.
   --installer-identity NAME  Developer ID Installer identity. Defaults to the first valid matching keychain identity.
   --notary-profile NAME      notarytool keychain profile. Defaults to HIDEF_NOTARY_PROFILE or NOTARY_PROFILE.
-  --skip-build               Sign the existing APP_DIR or build/HiDeF.app instead of rebuilding the macOS app.
+  --skip-build               Sign the existing APP_DIR or build/HighDeF.app instead of rebuilding the macOS app.
   --skip-notarization        Sign and package macOS artifacts without notarizing or stapling.
   --skip-pkg                 Build only the macOS app ZIP/disk image, not the /Applications installer package.
   --skip-dmg                 Build only the macOS app ZIP/package, not the drag-install disk image.
@@ -92,7 +92,7 @@ iOS App Store Connect export:
 
   Manual signing:
     Scripts/release-app.sh --only-ios --ios-signing-style manual --ios-team-id TEAMID \\
-      --ios-provisioning-profile "HiDeF App Store"
+      --ios-provisioning-profile "HighDeF App Store"
 USAGE
 }
 
@@ -498,7 +498,7 @@ if [[ "$BUILD_MACOS" -eq 1 ]]; then
 		configure_notary_auth
 	fi
 
-	# build-app.sh always writes $ROOT_DIR/build/HiDeF.app, so sign that bundle in place.
+	# build-app.sh always writes $ROOT_DIR/build/HighDeF.app, so sign that bundle in place.
 	if [[ -z "$APP_DIR" ]]; then
 		APP_DIR="$ROOT_DIR/build/$APP_NAME.app"
 	fi

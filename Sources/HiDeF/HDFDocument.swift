@@ -28,7 +28,7 @@ final class HDFDocument: ReferenceFileDocument, @unchecked Sendable {
 
     func fileWrapper(snapshot: Void, configuration: WriteConfiguration) throws -> FileWrapper {
         throw CocoaError(.fileWriteUnknown, userInfo: [
-            NSLocalizedDescriptionKey: "HiDeF is a read-only HDF5 viewer."
+            NSLocalizedDescriptionKey: "HighDeF is a read-only HDF5 viewer."
         ])
     }
 }

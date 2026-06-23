@@ -16,7 +16,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00000000000000000000T001"
-               BuildableName = "HiDeF.app"
+               BuildableName = "HighDeF.app"
                BlueprintName = "HiDeF"
                ReferencedContainer = "container:HiDeF.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "00000000000000000000T001"
-            BuildableName = "HiDeF.app"
+            BuildableName = "HighDeF.app"
             BlueprintName = "HiDeF"
             ReferencedContainer = "container:HiDeF.xcodeproj">
          </BuildableReference>
@@ -63,7 +63,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "00000000000000000000T001"
-            BuildableName = "HiDeF.app"
+            BuildableName = "HighDeF.app"
             BlueprintName = "HiDeF"
             ReferencedContainer = "container:HiDeF.xcodeproj">
          </BuildableReference>

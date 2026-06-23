@@ -48,7 +48,7 @@ private enum DemoHDFDocument {
             appropriateFor: nil,
             create: true
         )
-        let destinationURL = documentsURL.appendingPathComponent("HiDeF Demo.h5")
+        let destinationURL = documentsURL.appendingPathComponent("HighDeF Demo.h5")
 
         // (Re)install when the local copy is missing or stale — e.g. after an app update
         // ships a newer demo — so iOS opens the same demo file macOS does.
@@ -333,7 +333,7 @@ private enum DemoHDFDocumentOpener {
                 completion?(.success(()))
             } else {
                 completion?(.failure(CocoaError(.fileReadUnknown, userInfo: [
-                    NSLocalizedDescriptionKey: "iOS could not open \(url.lastPathComponent) as a HiDeF document."
+                    NSLocalizedDescriptionKey: "iOS could not open \(url.lastPathComponent) as a HighDeF document."
                 ])))
             }
         }

@@ -435,6 +435,9 @@ struct HDFDocumentSidebarView: View {
     @AppStorage("HDFThemePreference") private var themePreferenceRawValue = HDFThemePreference.system.rawValue
     #endif
     private let hasCloseAction: Bool
+    // On iPhone (compact width) the split view collapses to one column. Land on the sidebar
+    // so opening a document shows the navigation tree instead of the empty root detail view.
+    @State private var preferredCompactColumn: NavigationSplitViewColumn = .sidebar
 
     init(file: HDF5File, closeAction: HDFDocumentCloseAction? = nil) {
         _model = StateObject(wrappedValue: HDFDocumentViewModel(file: file))
@@ -454,7 +457,7 @@ struct HDFDocumentSidebarView: View {
     }
 
     private var documentView: some View {
-        NavigationSplitView {
+        NavigationSplitView(preferredCompactColumn: $preferredCompactColumn) {
             sidebar
         } detail: {
             HDFObjectDetailPanel(model: model)
