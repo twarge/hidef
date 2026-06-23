@@ -1,6 +1,6 @@
-# HiDeF
+# HighDeF
 
-HiDeF is a native document-based HDF5 viewer for Apple devices. The focus is on preview of large timeseries datasets. Limited image display capability exists.
+HighDeF is a native document-based HDF5 viewer for Apple devices. The focus is on preview of large timeseries datasets. Limited image display capability exists.
 
 ## Dependency
 

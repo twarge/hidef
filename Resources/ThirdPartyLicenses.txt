@@ -1,4 +1,4 @@
-HiDeF Third-Party Licenses
+HighDeF Third-Party Licenses
 
 HDF5
 License text reproduced from Vendor/hdf5/LICENSE.

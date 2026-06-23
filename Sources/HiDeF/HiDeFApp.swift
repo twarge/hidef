@@ -24,7 +24,7 @@ struct HiDeFApp: App {
         #endif
 
         #if os(iOS)
-        DocumentGroupLaunchScene("HiDeF") {
+        DocumentGroupLaunchScene("HighDeF") {
             DefaultDocumentGroupLaunchActions()
             DemoHDFDocumentButton()
         }
@@ -87,7 +87,7 @@ private enum DemoHDFDocument {
 import AppKit
 
 private enum HDFAppBrand {
-    static let name = "HiDeF"
+    static let name = "HighDeF"
     static let maker = "Twarge LLC"
     static let contactEmail = "hello@twarge.com"
     static let contactURL = URL(string: "mailto:hello@twarge.com")!

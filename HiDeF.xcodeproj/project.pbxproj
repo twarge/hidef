@@ -373,7 +373,7 @@
 				INFOPLIST_FILE = Resources/Info.plist;
 				"INFOPLIST_FILE[sdk=iphoneos*]" = Resources/iOS/Info.plist;
 				"INFOPLIST_FILE[sdk=iphonesimulator*]" = Resources/iOS/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = HiDeF;
+				INFOPLIST_KEY_CFBundleDisplayName = HighDeF;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -443,7 +443,7 @@
 				INFOPLIST_FILE = Resources/Info.plist;
 				"INFOPLIST_FILE[sdk=iphoneos*]" = Resources/iOS/Info.plist;
 				"INFOPLIST_FILE[sdk=iphonesimulator*]" = Resources/iOS/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = HiDeF;
+				INFOPLIST_KEY_CFBundleDisplayName = HighDeF;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
