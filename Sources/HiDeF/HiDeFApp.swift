@@ -22,6 +22,11 @@ struct HiDeFApp: App {
             HDFMacDocumentCommands()
         }
         #endif
+        #if os(iOS)
+        .commands {
+            HDFDocumentWindowCommands()
+        }
+        #endif
 
         #if os(iOS)
         DocumentGroupLaunchScene("HighDeF") {
@@ -31,6 +36,27 @@ struct HiDeFApp: App {
         #endif
     }
 }
+
+#if os(iOS)
+private struct HDFDocumentWindowCommands: Commands {
+    var body: some Commands {
+        // ⌘N opens a new window. iPad shows it as a separate window (Split View / Stage
+        // Manager) on the document browser, so a second file can be viewed side by side.
+        // iPhone shows one window at a time, so there it just brings up the browser.
+        CommandGroup(after: .newItem) {
+            Button("New Window") {
+                UIApplication.shared.requestSceneSessionActivation(
+                    nil,
+                    userActivity: nil,
+                    options: nil,
+                    errorHandler: nil
+                )
+            }
+            .keyboardShortcut("n", modifiers: .command)
+        }
+    }
+}
+#endif
 
 private enum DemoHDFDocument {
     static var bundledURL: URL? {
