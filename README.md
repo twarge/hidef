@@ -2,9 +2,13 @@
 
 HighDeF is a native document-based HDF5 viewer for Apple devices. The focus is on preview of large timeseries datasets. Limited image display capability exists.
 
-## Dependency
+## Building
 
-HDF5 is vendored as a git submodule at `Vendor/hdf5` and pinned to the `2.1.0` release tag. Build it into an XCFramework before building the app using `Scripts/build-hdf5-xcframework.sh`; this produces `Vendor/Build/HDF5.xcframework`. Then you can build the app with xcode or the build script. 
+HDF5 is vendored as a git submodule at `Vendor/hdf5` and pinned to the `2.1.0` release tag; it is built into `Vendor/Build/HDF5.xcframework` before the app.
+
+Run `make` to build the HDF5 XCFramework (if it isn't already built) and then the app. This drives `xcodebuild` against the shared scheme, so the result is identical to pressing **Build & Run** in Xcode; `make run` also launches the macOS app.
+
+To use Xcode directly, build the dependency once with `Scripts/build-hdf5-xcframework.sh`, then open `HiDeF.xcodeproj`.
 
 ## Design notes
 

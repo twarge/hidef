@@ -39,17 +39,36 @@ jobs:
       - name: Run smoke test
         run: HIDEF_USE_SYSTEM_HDF5=1 Scripts/smoke-test.sh
 
-  # Builds the macOS app bundle (unsigned) with the CLI build script.
+  # Builds the macOS app (unsigned) with the Xcode project. Needs the vendored
+  # HDF5 XCFramework; it is cached keyed on the submodule commit.
   build-macos:
     runs-on: macos-26
     steps:
       - uses: actions/checkout@v4
-      - name: Install HDF5
-        run: brew install hdf5 pkgconf
-      - name: Show toolchain
-        run: xcodebuild -version
-      - name: Build app
-        run: HIDEF_USE_SYSTEM_HDF5=1 HIDEF_SKIP_CODESIGN=1 Scripts/build-app.sh
+      - name: Resolve pinned HDF5 commit
+        id: hdf5
+        run: echo "sha=$(git ls-tree HEAD Vendor/hdf5 | awk '{print $3}')" >> "$GITHUB_OUTPUT"
+      - name: Cache HDF5 XCFramework
+        id: cache-xcframework
+        uses: actions/cache@v4
+        with:
+          path: Vendor/Build/HDF5.xcframework
+          key: hdf5-xcframework-${{ runner.os }}-${{ steps.hdf5.outputs.sha }}-${{ hashFiles('Scripts/build-hdf5-xcframework.sh') }}
+      - name: Build HDF5 XCFramework
+        if: steps.cache-xcframework.outputs.cache-hit != 'true'
+        run: |
+          git submodule update --init --depth 1 Vendor/hdf5
+          Scripts/build-hdf5-xcframework.sh
+      - name: Build macOS app (Xcode)
+        run: |
+          xcodebuild \
+            -project HiDeF.xcodeproj \
+            -scheme HiDeF \
+            -sdk macosx \
+            -destination 'platform=macOS' \
+            -configuration Debug \
+            CODE_SIGNING_ALLOWED=NO \
+            build
 
   # Builds the iOS app for the simulator via the Xcode project. Needs the
   # vendored HDF5 XCFramework; it is cached keyed on the submodule commit.
