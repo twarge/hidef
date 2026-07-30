@@ -65,7 +65,7 @@ jobs:
             archive: build/HighDeF-macOS.xcarchive
             asc_platform: MAC_OS
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
 
       - name: Install App Store Connect API key
         env:
