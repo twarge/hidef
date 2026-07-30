@@ -151,7 +151,7 @@ jobs:
 
       - name: Cache HDF5 XCFramework
         id: cache-xcframework
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: Vendor/Build/HDF5.xcframework
           key: hdf5-xcframework-${{ runner.os }}-${{ steps.hdf5.outputs.sha }}-${{ hashFiles('Scripts/build-hdf5-xcframework.sh') }}
