@@ -19,5 +19,6 @@ To use Xcode directly, build the dependency once with `Scripts/build-hdf5-xcfram
 - The dataset table requests bounded row windows as rows become visible instead of reading the full dataset.
 - Numeric plots are rendered from a bounded preview sample: one-dimensional and two-column samples become line plots, wider numeric slices become heatmaps.
 - Soft and external links are represented as links instead of being traversed automatically.
+- Numeric 1-D and 2-D datasets can be exported as CSV (File ▸ Export CSV… on macOS, the share button on iOS), streamed through the same bounded row windows as the table and capped at 50 million values.
 
 The macOS app keeps the HDF5 file open through an `NSDocument`; the iOS app opens documents through a `UIDocumentBrowserViewController`. Both ports share a SwiftUI sidebar-adaptable document viewer, the same HDF5 access layer, lazy hierarchy rendering, bounded dataset previews, and sampled numeric plots.

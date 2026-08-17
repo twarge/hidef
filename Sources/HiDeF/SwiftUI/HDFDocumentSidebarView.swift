@@ -438,6 +438,9 @@ struct HDFDocumentSidebarView: View {
     // On iPhone (compact width) the split view collapses to one column. Land on the sidebar
     // so opening a document shows the navigation tree instead of the empty root detail view.
     @State private var preferredCompactColumn: NavigationSplitViewColumn = .sidebar
+    #if os(iOS)
+    @State private var csvExportCapMessage: String?
+    #endif
 
     init(file: HDF5File, closeAction: HDFDocumentCloseAction? = nil) {
         _model = StateObject(wrappedValue: HDFDocumentViewModel(file: file))
@@ -467,6 +470,9 @@ struct HDFDocumentSidebarView: View {
             closeToolbarItem
             reloadToolbarItem
             datasetViewToolbarItem
+            #if os(iOS)
+            csvExportToolbarItem
+            #endif
             plotPreferencesToolbarItem
             #if os(iOS)
             themeToolbarItem
@@ -475,11 +481,83 @@ struct HDFDocumentSidebarView: View {
         #if os(macOS)
         .frame(minWidth: 860, minHeight: 560)
         .toolbarBackground(.hidden, for: .windowToolbar)
+        .focusedSceneValue(\.hdfDatasetCSVExport, csvExportContext)
         #elseif os(iOS)
         .toolbarBackground(.hidden, for: .navigationBar)
         .toolbarTitleDisplayMode(.inline)
+        .alert("Could Not Export CSV", isPresented: showsCSVExportCapMessage) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text(csvExportCapMessage ?? "")
+        }
         #endif
     }
+
+    #if os(macOS)
+    /// Published while the selection is a numeric 1-D/2-D dataset so File ▸
+    /// Export CSV… can act on the frontmost window. Over-cap datasets are
+    /// published too: the menu item explains the limit when activated.
+    private var csvExportContext: HDF5DatasetCSVExportContext? {
+        guard let object = model.selectedObject else {
+            return nil
+        }
+        switch HDF5DatasetCSVExporter.exportability(of: object) {
+        case .exportable, .tooLarge:
+            return HDF5DatasetCSVExportContext(file: model.file, object: object)
+        case .unsupported:
+            return nil
+        }
+    }
+    #endif
+
+    #if os(iOS)
+    private var showsCSVExportCapMessage: Binding<Bool> {
+        Binding {
+            csvExportCapMessage != nil
+        } set: { isPresented in
+            if !isPresented {
+                csvExportCapMessage = nil
+            }
+        }
+    }
+
+    @ToolbarContentBuilder
+    private var csvExportToolbarItem: some ToolbarContent {
+        ToolbarItem(placement: .primaryAction) {
+            if let object = model.selectedObject, object.kind == .dataset {
+                switch HDF5DatasetCSVExporter.exportability(of: object) {
+                case .exportable:
+                    ShareLink(
+                        item: HDF5DatasetCSVFile(file: model.file, object: object),
+                        preview: SharePreview(
+                            HDF5DatasetCSVExporter.defaultFilename(for: object),
+                            icon: Image(systemName: "tablecells")
+                        )
+                    ) {
+                        Image(systemName: "square.and.arrow.up")
+                    }
+                    .help("Export this dataset as CSV")
+                    .accessibilityLabel("Export CSV")
+                case .tooLarge(let cellCount):
+                    Button {
+                        csvExportCapMessage = HDF5DatasetCSVExporter.capMessage(cellCount: cellCount)
+                    } label: {
+                        Image(systemName: "square.and.arrow.up")
+                    }
+                    .help("Export this dataset as CSV")
+                    .accessibilityLabel("Export CSV")
+                case .unsupported:
+                    Button {} label: {
+                        Image(systemName: "square.and.arrow.up")
+                    }
+                    .disabled(true)
+                    .help("Only numeric 1-D and 2-D datasets can be exported as CSV")
+                    .accessibilityLabel("Export CSV")
+                }
+            }
+        }
+    }
+    #endif
 
     #if os(iOS)
     private var themePreference: HDFThemePreference {

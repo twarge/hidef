@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00000000000000000000B001 /* HDF5File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000F001 /* HDF5File.swift */; };
+		00000000000000000000B029 /* HDF5DatasetCSVExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000F029 /* HDF5DatasetCSVExport.swift */; };
 		00000000000000000000B002 /* HDF5Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000F002 /* HDF5Models.swift */; };
 		00000000000000000000B003 /* HiDeFHDF5.c in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000F003 /* HiDeFHDF5.c */; };
 		00000000000000000000B005 /* HDFDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000F007 /* HDFDocument.swift */; };
@@ -39,6 +40,7 @@
 		00000000000000000000F026 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		00000000000000000000F027 /* Demo/demo.h5 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Demo/demo.h5; sourceTree = "<group>"; };
 		00000000000000000000F028 /* HiDeFApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiDeFApp.swift; sourceTree = "<group>"; };
+		00000000000000000000F029 /* HDF5DatasetCSVExport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDF5DatasetCSVExport.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				00000000000000000000F001 /* HDF5File.swift */,
+				00000000000000000000F029 /* HDF5DatasetCSVExport.swift */,
 				00000000000000000000F002 /* HDF5Models.swift */,
 			);
 			path = Model;
@@ -241,6 +244,7 @@
 				00000000000000000000B005 /* HDFDocument.swift in Sources */,
 				00000000000000000000B001 /* HDF5File.swift in Sources */,
 				00000000000000000000B002 /* HDF5Models.swift in Sources */,
+				00000000000000000000B029 /* HDF5DatasetCSVExport.swift in Sources */,
 				00000000000000000000B021 /* HDFDocumentSidebarView.swift in Sources */,
 				00000000000000000000B003 /* HiDeFHDF5.c in Sources */,
 			);

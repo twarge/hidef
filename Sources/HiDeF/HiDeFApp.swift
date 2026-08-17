@@ -111,6 +111,7 @@ private enum DemoHDFDocument {
 
 #if os(macOS)
 import AppKit
+import UniformTypeIdentifiers
 
 private enum HDFAppBrand {
     static let name = "HighDeF"
@@ -121,6 +122,7 @@ private enum HDFAppBrand {
 
 private struct HDFMacDocumentCommands: Commands {
     @Environment(\.openDocument) private var openDocument
+    @FocusedValue(\.hdfDatasetCSVExport) private var csvExportContext
 
     var body: some Commands {
         CommandGroup(replacing: .appInfo) {
@@ -134,6 +136,53 @@ private struct HDFMacDocumentCommands: Commands {
                 openDemoFile()
             }
         }
+
+        // Enabled while the frontmost window has a numeric 1-D/2-D dataset
+        // selected. Datasets beyond the export cap keep the item enabled so
+        // activating it can explain the limit instead of failing silently.
+        CommandGroup(after: .importExport) {
+            Button("Export CSV…") {
+                exportCSV()
+            }
+            .disabled(csvExportContext == nil)
+        }
+    }
+
+    @MainActor
+    private func exportCSV() {
+        guard let context = csvExportContext else {
+            return
+        }
+
+        if case .tooLarge(let cellCount) = HDF5DatasetCSVExporter.exportability(of: context.object) {
+            showExportError(HDF5DatasetCSVExporter.capMessage(cellCount: cellCount))
+            return
+        }
+
+        let panel = NSSavePanel()
+        panel.allowedContentTypes = [.commaSeparatedText]
+        panel.nameFieldStringValue = HDF5DatasetCSVExporter.defaultFilename(for: context.object)
+        panel.canCreateDirectories = true
+        guard panel.runModal() == .OK, let url = panel.url else {
+            return
+        }
+
+        Task {
+            do {
+                try await HDF5DatasetCSVExporter.export(file: context.file, object: context.object, to: url)
+            } catch {
+                showExportError(error.localizedDescription)
+            }
+        }
+    }
+
+    @MainActor
+    private func showExportError(_ message: String) {
+        let alert = NSAlert()
+        alert.messageText = "Could Not Export CSV"
+        alert.informativeText = message
+        alert.alertStyle = .warning
+        alert.runModal()
     }
 
     private func openDemoFile() {
