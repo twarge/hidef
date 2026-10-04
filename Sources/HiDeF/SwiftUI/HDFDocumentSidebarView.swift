@@ -74,7 +74,12 @@ final class HDFDocumentViewModel: ObservableObject {
             let rootObject = try file.rootObject()
             let rootNode = HDFSidebarNode(object: rootObject)
             self.rootNode = rootNode
+            // On iOS the split view can collapse (iPhone, narrow iPad windows), and a non-nil
+            // list selection there opens the document on the detail column instead of the
+            // Contents list. The root still backs the detail placeholder, just unselected.
+            #if os(macOS)
             selectedPath = rootObject.path
+            #endif
             selectedObject = rootObject
             expandedPaths.insert(rootObject.path)
         } catch {
@@ -463,27 +468,22 @@ struct HDFDocumentSidebarView: View {
         NavigationSplitView(preferredCompactColumn: $preferredCompactColumn) {
             sidebar
         } detail: {
-            HDFObjectDetailPanel(model: model)
+            detail
         }
         .navigationSplitViewStyle(.balanced)
+        #if os(macOS)
+        // The window has a single toolbar, so macOS keeps its items together here.
+        // iOS attaches them to the columns instead (see `sidebar` and `detail`).
         .toolbar {
             closeToolbarItem
             reloadToolbarItem
             datasetViewToolbarItem
-            #if os(iOS)
-            csvExportToolbarItem
-            #endif
             plotPreferencesToolbarItem
-            #if os(iOS)
-            themeToolbarItem
-            #endif
         }
-        #if os(macOS)
         .frame(minWidth: 860, minHeight: 560)
         .toolbarBackground(.hidden, for: .windowToolbar)
         .focusedSceneValue(\.hdfDatasetCSVExport, csvExportContext)
         #elseif os(iOS)
-        .toolbarBackground(.hidden, for: .navigationBar)
         .toolbarTitleDisplayMode(.inline)
         .alert("Could Not Export CSV", isPresented: showsCSVExportCapMessage) {
             Button("OK", role: .cancel) {}
@@ -523,8 +523,8 @@ struct HDFDocumentSidebarView: View {
 
     @ToolbarContentBuilder
     private var csvExportToolbarItem: some ToolbarContent {
-        ToolbarItem(placement: .primaryAction) {
-            if let object = model.selectedObject, object.kind == .dataset {
+        if let object = model.selectedObject, object.kind == .dataset {
+            ToolbarItem(placement: .primaryAction) {
                 switch HDF5DatasetCSVExporter.exportability(of: object) {
                 case .exportable:
                     ShareLink(
@@ -597,21 +597,35 @@ struct HDFDocumentSidebarView: View {
 
     @ToolbarContentBuilder
     private var datasetViewToolbarItem: some ToolbarContent {
+        #if os(macOS)
         ToolbarItem(placement: .primaryAction) {
             if model.selectedObject?.kind == .dataset {
-                Picker("Dataset View", selection: datasetDetailModeBinding) {
-                    ForEach(model.availableDatasetDetailModes) { mode in
-                        Image(systemName: mode.symbolName)
-                            .tag(mode)
-                            .accessibilityLabel(mode.title)
-                    }
-                }
-                .pickerStyle(.segmented)
-                .labelsHidden()
-                .frame(width: model.availableDatasetDetailModes.count > 2 ? 132 : 92)
-                .accessibilityLabel("Dataset View")
+                datasetViewPicker
+                    .frame(width: model.availableDatasetDetailModes.count > 2 ? 132 : 92)
             }
         }
+        #else
+        // The view mode switches the whole detail, so it takes the principal slot. It sizes
+        // itself to its segments so it can also adapt to the vertical bar on iPhone Duo.
+        if model.selectedObject?.kind == .dataset {
+            ToolbarItem(placement: .principal) {
+                datasetViewPicker
+            }
+        }
+        #endif
+    }
+
+    private var datasetViewPicker: some View {
+        Picker("Dataset View", selection: datasetDetailModeBinding) {
+            ForEach(model.availableDatasetDetailModes) { mode in
+                Image(systemName: mode.symbolName)
+                    .tag(mode)
+                    .accessibilityLabel(mode.title)
+            }
+        }
+        .pickerStyle(.segmented)
+        .labelsHidden()
+        .accessibilityLabel("Dataset View")
     }
 
     private var datasetDetailModeBinding: Binding<HDFDatasetDetailMode> {
@@ -663,8 +677,30 @@ struct HDFDocumentSidebarView: View {
             .navigationTitle("Contents")
         #if os(macOS)
             .navigationSplitViewColumnWidth(min: 240, ideal: 310, max: 420)
-        #else
+        #elseif os(iOS)
             .toolbarTitleDisplayMode(.inline)
+            // Closing and the app theme live on Contents: the screen a collapsed split view
+            // (iPhone) opens on and returns to, and the column beside the detail on iPad.
+            .toolbar {
+                closeToolbarItem
+                themeToolbarItem
+            }
+        #endif
+    }
+
+    @ViewBuilder
+    private var detail: some View {
+        HDFObjectDetailPanel(model: model)
+        #if os(iOS)
+            // Items that act on the data being viewed travel with the detail column, so
+            // they survive the split view collapsing to one column. Reload is here too:
+            // it refreshes the data views, not the Contents tree.
+            .toolbar {
+                datasetViewToolbarItem
+                reloadToolbarItem
+                csvExportToolbarItem
+                plotPreferencesToolbarItem
+            }
         #endif
     }
 }
