@@ -13,6 +13,11 @@ concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
+# The xcode-27 image defaults to Xcode 27.0. Build with 27.1, the Xcode the
+# app is developed on, so CI compiles against the same SDKs.
+env:
+  DEVELOPER_DIR: /Applications/Xcode_27.1.app/Contents/Developer
+
 jobs:
   # Runs on a case-sensitive filesystem, so it catches path-case mismatches
   # that macOS hides, plus basic script hygiene.
@@ -32,7 +37,7 @@ jobs:
 
   # Exercises the C shim against Homebrew HDF5 (no vendored XCFramework needed).
   smoke-test:
-    runs-on: macos-26
+    runs-on: xcode-27
     steps:
       - uses: actions/checkout@v7
       - name: Install HDF5
@@ -43,7 +48,7 @@ jobs:
   # Builds the macOS app (unsigned) with the Xcode project. Needs the vendored
   # HDF5 XCFramework; it is cached keyed on the submodule commit.
   build-macos:
-    runs-on: macos-26
+    runs-on: xcode-27
     steps:
       - uses: actions/checkout@v7
       - name: Resolve pinned HDF5 commit
@@ -74,7 +79,7 @@ jobs:
   # Builds the iOS app for the simulator via the Xcode project. Needs the
   # vendored HDF5 XCFramework; it is cached keyed on the submodule commit.
   build-ios:
-    runs-on: macos-26
+    runs-on: xcode-27
     steps:
       - uses: actions/checkout@v7
       - name: Resolve pinned HDF5 commit
