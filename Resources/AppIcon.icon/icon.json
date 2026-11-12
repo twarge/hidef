@@ -3,8 +3,8 @@
     {
       "value" : {
         "linear-gradient" : [
-          "extended-srgb:0.99200,0.99200,0.98000,1.00000",
-          "extended-srgb:0.94100,0.94100,0.91800,1.00000"
+          "extended-srgb:0.99216,0.99216,0.98039,1.00000",
+          "extended-srgb:0.94118,0.94118,0.91765,1.00000"
         ]
       }
     },
@@ -12,8 +12,8 @@
       "appearance" : "dark",
       "value" : {
         "linear-gradient" : [
-          "extended-srgb:0.16500,0.16900,0.18000,1.00000",
-          "extended-srgb:0.06300,0.06700,0.07500,1.00000"
+          "extended-srgb:0.11765,0.14118,0.25098,1.00000",
+          "extended-srgb:0.03922,0.04706,0.09412,1.00000"
         ]
       }
     },
@@ -21,8 +21,8 @@
       "appearance" : "tinted",
       "value" : {
         "linear-gradient" : [
-          "extended-srgb:0.16500,0.16900,0.18000,1.00000",
-          "extended-srgb:0.06300,0.06700,0.07500,1.00000"
+          "extended-srgb:0.11765,0.14118,0.25098,1.00000",
+          "extended-srgb:0.03922,0.04706,0.09412,1.00000"
         ]
       }
     }
@@ -33,15 +33,26 @@
         {
           "fill-specializations" : [
             {
+              "value" : {
+                "linear-gradient" : [
+                  "extended-srgb:1.00000,0.64706,0.12157,1.00000",
+                  "extended-srgb:0.94902,0.22745,0.18039,1.00000"
+                ]
+              }
+            },
+            {
               "appearance" : "dark",
               "value" : {
-                "solid" : "extended-srgb:0.97300,0.97300,0.95700,1.00000"
+                "linear-gradient" : [
+                  "extended-srgb:1.00000,0.70980,0.20392,1.00000",
+                  "extended-srgb:1.00000,0.32549,0.25098,1.00000"
+                ]
               }
             },
             {
               "appearance" : "tinted",
               "value" : {
-                "solid" : "extended-srgb:0.97300,0.97300,0.95700,1.00000"
+                "solid" : "extended-srgb:0.97255,0.97255,0.95686,1.00000"
               }
             }
           ],
@@ -65,13 +76,13 @@
             {
               "appearance" : "dark",
               "value" : {
-                "solid" : "extended-srgb:0.04700,0.05100,0.05900,1.00000"
+                "solid" : "extended-srgb:0.03529,0.04314,0.08627,1.00000"
               }
             },
             {
               "appearance" : "tinted",
               "value" : {
-                "solid" : "extended-srgb:0.04700,0.05100,0.05900,1.00000"
+                "solid" : "extended-srgb:0.03529,0.04314,0.08627,1.00000"
               }
             }
           ],
@@ -91,54 +102,9 @@
     {
       "layers" : [
         {
-          "fill-specializations" : [
-            {
-              "appearance" : "dark",
-              "value" : {
-                "solid" : "extended-srgb:0.97300,0.97300,0.95700,1.00000"
-              }
-            },
-            {
-              "appearance" : "tinted",
-              "value" : {
-                "solid" : "extended-srgb:0.97300,0.97300,0.95700,1.00000"
-              }
-            }
-          ],
           "glass" : false,
-          "image-name" : "Data.svg",
-          "name" : "Data"
-        }
-      ],
-      "shadow" : {
-        "kind" : "neutral",
-        "opacity" : 0
-      },
-      "translucency" : {
-        "enabled" : false,
-        "value" : 0.5
-      }
-    },
-    {
-      "layers" : [
-        {
-          "fill-specializations" : [
-            {
-              "appearance" : "dark",
-              "value" : {
-                "solid" : "extended-srgb:0.97300,0.97300,0.95700,1.00000"
-              }
-            },
-            {
-              "appearance" : "tinted",
-              "value" : {
-                "solid" : "extended-srgb:0.97300,0.97300,0.95700,1.00000"
-              }
-            }
-          ],
-          "glass" : false,
-          "image-name" : "Grid.svg",
-          "name" : "Grid"
+          "image-name" : "Traces.svg",
+          "name" : "Traces"
         }
       ],
       "shadow" : {
