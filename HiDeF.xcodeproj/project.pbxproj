@@ -13,7 +13,7 @@
 		00000000000000000000B003 /* HiDeFHDF5.c in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000F003 /* HiDeFHDF5.c */; };
 		00000000000000000000B005 /* HDFDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000F007 /* HDFDocument.swift */; };
 		00000000000000000000B008 /* HDF5.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00000000000000000000F017 /* HDF5.xcframework */; };
-		00000000000000000000B009 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000F020 /* Assets.xcassets */; };
+		00000000000000000000B009 /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000F020 /* AppIcon.icon */; };
 		00000000000000000000B021 /* HDFDocumentSidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000F024 /* HDFDocumentSidebarView.swift */; };
 		00000000000000000000B023 /* ThirdPartyLicenses.txt in Resources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000F025 /* ThirdPartyLicenses.txt */; };
 		00000000000000000000B024 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 00000000000000000000F026 /* LICENSE */; };
@@ -32,9 +32,7 @@
 		00000000000000000000F016 /* iOS Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "iOS Info.plist"; path = iOS/Info.plist; sourceTree = "<group>"; };
 		00000000000000000000F017 /* HDF5.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = HDF5.xcframework; sourceTree = "<group>"; };
 		00000000000000000000F018 /* HighDeF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HighDeF.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		00000000000000000000F020 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		00000000000000000000F021 /* HiDeFIcon.svg */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = HiDeFIcon.svg; sourceTree = "<group>"; };
-		00000000000000000000F022 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = AppIcon.icns; sourceTree = "<group>"; };
+		00000000000000000000F020 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 		00000000000000000000F024 /* HDFDocumentSidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HDFDocumentSidebarView.swift; sourceTree = "<group>"; };
 		00000000000000000000F025 /* ThirdPartyLicenses.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ThirdPartyLicenses.txt; sourceTree = "<group>"; };
 		00000000000000000000F026 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -125,23 +123,13 @@
 		00000000000000000000G030 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				00000000000000000000F020 /* Assets.xcassets */,
-				00000000000000000000F022 /* AppIcon.icns */,
-				00000000000000000000G031 /* IconSource */,
+				00000000000000000000F020 /* AppIcon.icon */,
 				00000000000000000000F015 /* Info.plist */,
 				00000000000000000000F016 /* iOS Info.plist */,
 				00000000000000000000F025 /* ThirdPartyLicenses.txt */,
 				00000000000000000000F027 /* Demo/demo.h5 */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		00000000000000000000G031 /* IconSource */ = {
-			isa = PBXGroup;
-			children = (
-				00000000000000000000F021 /* HiDeFIcon.svg */,
-			);
-			path = IconSource;
 			sourceTree = "<group>";
 		};
 		00000000000000000000G040 /* Vendor */ = {
@@ -226,7 +214,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00000000000000000000B009 /* Assets.xcassets in Resources */,
+				00000000000000000000B009 /* AppIcon.icon in Resources */,
 				00000000000000000000B023 /* ThirdPartyLicenses.txt in Resources */,
 				00000000000000000000B024 /* LICENSE in Resources */,
 				00000000000000000000B026 /* Demo/demo.h5 in Resources */,

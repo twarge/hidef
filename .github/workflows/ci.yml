@@ -29,7 +29,7 @@ jobs:
         run: |
           test -f HiDeF.xcodeproj/project.pbxproj
           test -f HiDeF.xcodeproj/xcshareddata/xcschemes/HiDeF.xcscheme
-          test -f Resources/IconSource/HiDeFIcon.svg
+          test -f Resources/AppIcon.icon/icon.json
           test -f Resources/Demo/demo.h5
           test -f Sources/HDF5Shim/HiDeFHDF5.c
       - name: Shell syntax check

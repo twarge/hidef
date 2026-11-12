@@ -1,0 +1,157 @@
+{
+  "fill-specializations" : [
+    {
+      "value" : {
+        "linear-gradient" : [
+          "extended-srgb:0.99200,0.99200,0.98000,1.00000",
+          "extended-srgb:0.94100,0.94100,0.91800,1.00000"
+        ]
+      }
+    },
+    {
+      "appearance" : "dark",
+      "value" : {
+        "linear-gradient" : [
+          "extended-srgb:0.16500,0.16900,0.18000,1.00000",
+          "extended-srgb:0.06300,0.06700,0.07500,1.00000"
+        ]
+      }
+    },
+    {
+      "appearance" : "tinted",
+      "value" : {
+        "linear-gradient" : [
+          "extended-srgb:0.16500,0.16900,0.18000,1.00000",
+          "extended-srgb:0.06300,0.06700,0.07500,1.00000"
+        ]
+      }
+    }
+  ],
+  "groups" : [
+    {
+      "layers" : [
+        {
+          "fill-specializations" : [
+            {
+              "appearance" : "dark",
+              "value" : {
+                "solid" : "extended-srgb:0.97300,0.97300,0.95700,1.00000"
+              }
+            },
+            {
+              "appearance" : "tinted",
+              "value" : {
+                "solid" : "extended-srgb:0.97300,0.97300,0.95700,1.00000"
+              }
+            }
+          ],
+          "image-name" : "H5.svg",
+          "name" : "H5"
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : false,
+        "value" : 0.5
+      }
+    },
+    {
+      "layers" : [
+        {
+          "fill-specializations" : [
+            {
+              "appearance" : "dark",
+              "value" : {
+                "solid" : "extended-srgb:0.04700,0.05100,0.05900,1.00000"
+              }
+            },
+            {
+              "appearance" : "tinted",
+              "value" : {
+                "solid" : "extended-srgb:0.04700,0.05100,0.05900,1.00000"
+              }
+            }
+          ],
+          "image-name" : "Halo.svg",
+          "name" : "Halo"
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.25
+      },
+      "translucency" : {
+        "enabled" : false,
+        "value" : 0.5
+      }
+    },
+    {
+      "layers" : [
+        {
+          "fill-specializations" : [
+            {
+              "appearance" : "dark",
+              "value" : {
+                "solid" : "extended-srgb:0.97300,0.97300,0.95700,1.00000"
+              }
+            },
+            {
+              "appearance" : "tinted",
+              "value" : {
+                "solid" : "extended-srgb:0.97300,0.97300,0.95700,1.00000"
+              }
+            }
+          ],
+          "glass" : false,
+          "image-name" : "Data.svg",
+          "name" : "Data"
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0
+      },
+      "translucency" : {
+        "enabled" : false,
+        "value" : 0.5
+      }
+    },
+    {
+      "layers" : [
+        {
+          "fill-specializations" : [
+            {
+              "appearance" : "dark",
+              "value" : {
+                "solid" : "extended-srgb:0.97300,0.97300,0.95700,1.00000"
+              }
+            },
+            {
+              "appearance" : "tinted",
+              "value" : {
+                "solid" : "extended-srgb:0.97300,0.97300,0.95700,1.00000"
+              }
+            }
+          ],
+          "glass" : false,
+          "image-name" : "Grid.svg",
+          "name" : "Grid"
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0
+      },
+      "translucency" : {
+        "enabled" : false,
+        "value" : 0.5
+      }
+    }
+  ],
+  "supported-platforms" : {
+    "squares" : "shared"
+  }
+}
