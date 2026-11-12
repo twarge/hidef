@@ -11,11 +11,13 @@
 // so the artwork here is full bleed and carries no mask, rim or shadow of its
 // own.
 //
-// The picture, from back to front: a sheet of paper (the fill), a cascade of
-// drifting data traces in cool colours (Traces), and a large H5 monogram in a
-// warm gradient (H5) on its knocked-out label (Halo). In the dark appearance
-// the paper turns to ink; in the tinted and clear ones the monogram also
-// loses its colour and the system takes it from there.
+// The picture, from back to front: a paper sky (the fill), a cascade of
+// drifting data traces, each filled beneath with a gradient so that together
+// they read as mountain ridges receding into the distance (Ridges), and a
+// large yellow H5 monogram (H5) on its knocked-out label (Halo). In the dark
+// appearance the sky turns to ink and the ridges fade into night instead of
+// mist (RidgesDark, which stands in for Ridges); in the tinted and clear ones
+// the monogram also loses its colour and the system takes it from there.
 //
 // The traces are seeded random walks, so every run draws the same picture.
 // The lettering is Menlo Bold, which ships with macOS, converted to outlines
@@ -43,18 +45,31 @@ func fail(_ message: String) -> Never {
 
 let canvas = 1024.0
 
-// The traces: one random walk per band from top to bottom, each running past
-// both edges and wandering about the middle of its band. A trace's slope
+// The ridges: each crest is a random walk running past both edges. Its slope
 // drifts (`drift` is the kick it gets per sample, `momentum` how much of the
 // slope carries over) and `jitter` is sample noise on top.
-let traceCount = 10
-let traceSamples = 140
-let traceWidth = 12.0
-let traceOverhang = 32.0
+let ridgeCount = 10
+let ridgeSamples = 140
+let ridgeOverhang = 32.0
 let drift = 1.2
 let momentum = 0.9
 let jitter = 4.0
 let seed: UInt64 = 0x4835 // "H5"
+
+// Depth. The farthest ridge rests on `horizon` and the nearest on
+// `foreground`; a `perspective` above 1 crowds the far ones together. Each
+// pair below is the value for the farthest ridge and for the nearest, and the
+// ridges between take values in between.
+let horizon = 170.0
+let foreground = 990.0
+let perspective = 1.35
+let relief = (far: 0.5, near: 1.3)       // how tall the walk stands
+let crestWidth = (far: 6.0, near: 11.0)  // the trace drawn along the crest
+
+// The gradient under a crest runs from `reach` above the ridge's resting
+// height to `fade` below it, both scaled by the ridge's relief.
+let reach = 40.0
+let fade = 230.0
 
 // The monogram, centred on the canvas, and how far its label reaches past it.
 let monogram = "H5"
@@ -63,14 +78,28 @@ let labelMargin = 22.0
 
 // MARK: Colours, as 0xRRGGBB
 
-let paper: [UInt32] = [0xFDFDFA, 0xF0F0EA]      // the fill, top to bottom
-let ink: [UInt32] = [0x1E2440, 0x0A0C18]        // the fill when dark or tinted
-let spectrum: [UInt32] = [0x8A5CFF, 0x3D7BFF, 0x14AEDC, 0x14C2A0, 0x36C46A] // first trace to last
-let ember: [UInt32] = [0xFFA51F, 0xF23A2E]      // the monogram, top to bottom
-let emberOnInk: [UInt32] = [0xFFB534, 0xFF5340] // the monogram when dark
-let chalk: UInt32 = 0xF8F8F4                    // the monogram when tinted
-let white: UInt32 = 0xFFFFFF                    // the label
-let night: UInt32 = 0x090B16                    // the label when dark or tinted
+let paper: [UInt32] = [0xFDFDFA, 0xF0F0EA]       // the fill, top to bottom
+let ink: [UInt32] = [0x1E2440, 0x0A0C18]         // the fill when dark or tinted
+let spectrum: [UInt32] = [0x8A5CFF, 0x3D7BFF, 0x14AEDC, 0x14C2A0, 0x36C46A] // farthest ridge to nearest
+let yellow: [UInt32] = [0xFFE347, 0xFFBE0B]      // the monogram, top to bottom
+let yellowOnInk: [UInt32] = [0xFFE95C, 0xFFC61A] // the monogram when dark
+let chalk: UInt32 = 0xF8F8F4                     // the monogram when tinted
+let white: UInt32 = 0xFFFFFF                     // the label
+let night: UInt32 = 0x090B16                     // the label when dark or tinted
+
+/// How the ridges sit in the air over `ground`. Each number is how much of a
+/// ridge's own colour is mixed into the ground: at the top of its gradient
+/// (`crest`), at the bottom (`base`) and in the trace along its crest
+/// (`line`). Above 1 pushes past the colour, away from the ground.
+struct Air {
+    var ground: UInt32
+    var crest: (far: Double, near: Double)
+    var base: Double
+    var line: (far: Double, near: Double)
+}
+
+let mist = Air(ground: paper[0], crest: (0.5, 1.0), base: 0.2, line: (0.85, 1.15))
+let dusk = Air(ground: ink[1], crest: (0.3, 0.7), base: 0.06, line: (0.6, 1.0))
 
 func channels(_ colour: UInt32) -> [Double] {
     [16, 8, 0].map { Double((colour >> $0) & 0xFF) / 255 }
@@ -86,14 +115,24 @@ func named(_ colour: UInt32) -> String {
     "extended-srgb:" + channels(colour).map { String(format: "%.5f", $0) }.joined(separator: ",") + ",1.00000"
 }
 
-/// The colour `fraction` of the way along `stops`, as SVG writes it.
-func blend(_ stops: [UInt32], at fraction: Double) -> String {
+func between(_ from: Double, _ to: Double, _ fraction: Double) -> Double {
+    from + (to - from) * fraction
+}
+
+func mix(_ from: [Double], _ to: [Double], _ fraction: Double) -> [Double] {
+    zip(from, to).map { between($0, $1, fraction) }
+}
+
+/// The colour `fraction` of the way along `stops`.
+func blend(_ stops: [UInt32], at fraction: Double) -> [Double] {
     let position = fraction * Double(stops.count - 1)
     let index = min(Int(position), stops.count - 2)
-    let mixed = zip(channels(stops[index]), channels(stops[index + 1])).map { from, to in
-        from + (to - from) * (position - Double(index))
-    }
-    return "#" + mixed.map { String(format: "%02X", Int(($0 * 255).rounded())) }.joined()
+    return mix(channels(stops[index]), channels(stops[index + 1]), position - Double(index))
+}
+
+/// Channels as SVG writes them, clamped to what it can say.
+func hex(_ channels: [Double]) -> String {
+    "#" + channels.map { String(format: "%02X", Int((min(max($0, 0), 1) * 255).rounded())) }.joined()
 }
 
 // MARK: Noise
@@ -184,31 +223,56 @@ func svg(_ body: [String]) -> String {
         + body.map { "  \($0)\n" }.joined() + "</svg>\n"
 }
 
-func traces() -> [String] {
-    var noise = Noise(state: seed)
-    let band = canvas / Double(traceCount)
-    let step = (canvas + 2 * traceOverhang) / Double(traceSamples)
+struct Ridge {
+    var depth: Double  // 0 for the farthest, 1 for the nearest
+    var rest: Double   // the height its crest wanders about
+    var relief: Double
+    var crest: String  // path data, left to right
+}
 
-    var body = ["<g fill=\"none\" stroke-width=\"\(number(traceWidth))\" stroke-linejoin=\"round\" stroke-linecap=\"round\">"]
-    for trace in 0..<traceCount {
+let ridges: [Ridge] = {
+    var noise = Noise(state: seed)
+    let step = (canvas + 2 * ridgeOverhang) / Double(ridgeSamples)
+    return (0..<ridgeCount).map { index in
         var level = 0.0
         var slope = 0.0
         var samples: [Double] = []
-        for _ in 0...traceSamples {
+        for _ in 0...ridgeSamples {
             samples.append(level + jitter * noise.normal())
             slope = slope * momentum + drift * noise.normal()
             level += slope
         }
-        // Wherever the walk went, it sits about the middle of its band.
-        let rest = (Double(trace) + 0.5) * band - samples.reduce(0, +) / Double(samples.count)
-        let line = samples.enumerated().map { index, sample in
-            "\(index == 0 ? "M" : "L")\(number(Double(index) * step - traceOverhang)) \(number(rest + sample))"
+        let depth = Double(index) / Double(ridgeCount - 1)
+        let scale = between(relief.far, relief.near, depth)
+        let rest = between(horizon, foreground, pow(depth, perspective))
+        // Wherever the walk went, the ridge sits about its resting height.
+        let mean = samples.reduce(0, +) / Double(samples.count)
+        let crest = samples.enumerated().map { column, sample in
+            "\(column == 0 ? "M" : "L")\(number(Double(column) * step - ridgeOverhang)) \(number(rest + (sample - mean) * scale))"
         }.joined()
-        let colour = blend(spectrum, at: Double(trace) / Double(traceCount - 1))
-        body.append("  <path d=\"\(line)\" stroke=\"\(colour)\"/>")
+        return Ridge(depth: depth, rest: rest, relief: scale, crest: crest)
     }
-    body.append("</g>")
-    return body
+}()
+
+/// The ridges from the farthest to the nearest, each hiding what is behind it.
+func range(in air: Air) -> [String] {
+    let ground = channels(air.ground)
+    var gradients = ["<defs>"]
+    var body: [String] = []
+    for (index, ridge) in ridges.enumerated() {
+        let colour = blend(spectrum, at: ridge.depth)
+        let top = mix(ground, colour, between(air.crest.far, air.crest.near, ridge.depth))
+        let bottom = mix(ground, colour, air.base)
+        let line = mix(ground, colour, between(air.line.far, air.line.near, ridge.depth))
+        gradients.append("  <linearGradient id=\"ridge\(index)\" gradientUnits=\"userSpaceOnUse\" "
+            + "x1=\"0\" y1=\"\(number(ridge.rest - reach * ridge.relief))\" x2=\"0\" y2=\"\(number(ridge.rest + fade * ridge.relief))\">"
+            + "<stop offset=\"0\" stop-color=\"\(hex(top))\"/><stop offset=\"1\" stop-color=\"\(hex(bottom))\"/></linearGradient>")
+        body.append("<path d=\"\(ridge.crest)V\(number(canvas + ridgeOverhang))H\(number(-ridgeOverhang))Z\" fill=\"url(#ridge\(index))\"/>")
+        body.append("<path d=\"\(ridge.crest)\" fill=\"none\" stroke=\"\(hex(line))\" "
+            + "stroke-width=\"\(number(between(crestWidth.far, crestWidth.near, ridge.depth)))\" stroke-linejoin=\"round\" stroke-linecap=\"round\"/>")
+    }
+    gradients.append("</defs>")
+    return gradients + body
 }
 
 /// The monogram's outlines with their ink centred on the canvas.
@@ -220,7 +284,7 @@ let monogramData: String = {
 
 /// The fill here is what a viewer of the bare SVG sees; icon.json has the gradient.
 func h5() -> [String] {
-    ["<path d=\"\(monogramData)\" fill=\"\(hex(ember[0]))\"/>"]
+    ["<path d=\"\(monogramData)\" fill=\"\(hex(yellow[0]))\"/>"]
 }
 
 func halo() -> [String] {
@@ -244,22 +308,43 @@ func fills(_ plain: [UInt32]? = nil, dark: [UInt32], tinted: [UInt32]) -> [[Stri
     ]
 }
 
+/// Which appearances show a layer, as icon.json's hidden-specializations.
+enum Shown {
+    case always, plainOnly, darkAndTintedOnly
+
+    var hidden: [[String: Any]] {
+        switch self {
+        case .always: []
+        case .plainOnly: ["dark", "tinted"].map { ["appearance": $0, "value": true] }
+        case .darkAndTintedOnly: [["value": true]] + ["dark", "tinted"].map { ["appearance": $0, "value": false] }
+        }
+    }
+}
+
 struct Layer {
     var name: String
     var body: [String]
-    var glass: Bool
-    var shadow: Double
+    var glass = true
     /// Fills that replace the SVG's own colours; none leaves them as drawn.
     var fills: [[String: Any]] = []
+    var shown = Shown.always
 }
 
-// Layers from front to back, the order icon.json lists them. Only the
-// monogram and its label are glass; the traces stay flat and keep their own
-// colours in every appearance.
-let layers = [
-    Layer(name: "H5", body: h5(), glass: true, shadow: 0.5, fills: fills(ember, dark: emberOnInk, tinted: [chalk])),
-    Layer(name: "Halo", body: halo(), glass: true, shadow: 0.25, fills: fills(dark: [night], tinted: [night])),
-    Layer(name: "Traces", body: traces(), glass: false, shadow: 0),
+struct Group {
+    var layers: [Layer]
+    var shadow: Double
+}
+
+// Groups from front to back, the order icon.json lists them. Only the
+// monogram and its label are glass; the ridges stay flat and keep their own
+// colours. The two sets of ridges are never shown together.
+let groups = [
+    Group(layers: [Layer(name: "H5", body: h5(), fills: fills(yellow, dark: yellowOnInk, tinted: [chalk]))], shadow: 0.5),
+    Group(layers: [Layer(name: "Halo", body: halo(), fills: fills(dark: [night], tinted: [night]))], shadow: 0.25),
+    Group(layers: [
+        Layer(name: "Ridges", body: range(in: mist), glass: false, shown: .plainOnly),
+        Layer(name: "RidgesDark", body: range(in: dusk), glass: false, shown: .darkAndTintedOnly),
+    ], shadow: 0),
 ]
 
 let root = URL(fileURLWithPath: #filePath).standardizedFileURL.deletingLastPathComponent().deletingLastPathComponent()
@@ -270,24 +355,29 @@ do {
     // Start clean, so that a layer dropped from the design leaves no file behind.
     if FileManager.default.fileExists(atPath: bundle.path) { try FileManager.default.removeItem(at: bundle) }
     try FileManager.default.createDirectory(at: assets, withIntermediateDirectories: true)
-    var groups: [[String: Any]] = []
-    for layer in layers {
-        try svg(layer.body).write(to: assets.appendingPathComponent(layer.name + ".svg"), atomically: true, encoding: .utf8)
-        var entry: [String: Any] = [
-            "image-name": layer.name + ".svg",
-            "name": layer.name,
-        ]
-        if !layer.fills.isEmpty { entry["fill-specializations"] = layer.fills }
-        if !layer.glass { entry["glass"] = false }
-        groups.append([
-            "layers": [entry],
-            "shadow": ["kind": "neutral", "opacity": layer.shadow],
+    var entries: [[String: Any]] = []
+    for group in groups {
+        var layers: [[String: Any]] = []
+        for layer in group.layers {
+            try svg(layer.body).write(to: assets.appendingPathComponent(layer.name + ".svg"), atomically: true, encoding: .utf8)
+            var entry: [String: Any] = [
+                "image-name": layer.name + ".svg",
+                "name": layer.name,
+            ]
+            if !layer.fills.isEmpty { entry["fill-specializations"] = layer.fills }
+            if !layer.shown.hidden.isEmpty { entry["hidden-specializations"] = layer.shown.hidden }
+            if !layer.glass { entry["glass"] = false }
+            layers.append(entry)
+        }
+        entries.append([
+            "layers": layers,
+            "shadow": ["kind": "neutral", "opacity": group.shadow],
             "translucency": ["enabled": false, "value": 0.5],
         ])
     }
     let document: [String: Any] = [
         "fill-specializations": fills(paper, dark: ink, tinted: ink),
-        "groups": groups,
+        "groups": entries,
         "supported-platforms": ["squares": "shared"],
     ]
     var json = try JSONSerialization.data(withJSONObject: document, options: [.prettyPrinted, .sortedKeys])
