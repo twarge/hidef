@@ -10,7 +10,8 @@ BUILD_ROOT="$ROOT_DIR/Vendor/Build"
 XCFRAMEWORK="$BUILD_ROOT/HDF5.xcframework"
 MACOS_DEPLOYMENT_TARGET="${MACOSX_DEPLOYMENT_TARGET:-26.0}"
 IOS_DEPLOYMENT_TARGET="${IPHONEOS_DEPLOYMENT_TARGET:-26.0}"
-PLATFORMS="${HIDEF_HDF5_PLATFORMS:-macos ios ios-simulator}"
+VISIONOS_DEPLOYMENT_TARGET="${XROS_DEPLOYMENT_TARGET:-26.0}"
+PLATFORMS="${HIDEF_HDF5_PLATFORMS:-macos ios ios-simulator visionos visionos-simulator}"
 PATH_REMAP_FLAGS="-ffile-prefix-map=$ROOT_DIR=. -fdebug-prefix-map=$ROOT_DIR=."
 
 if [ ! -d "$HDF5_SRC/src" ]; then
@@ -115,9 +116,15 @@ for platform in $PLATFORMS; do
         ios-simulator)
             build_variant ios-simulator iphonesimulator "arm64;x86_64" "$IOS_DEPLOYMENT_TARGET" iOS
             ;;
+        visionos)
+            build_variant visionos xros arm64 "$VISIONOS_DEPLOYMENT_TARGET" visionOS
+            ;;
+        visionos-simulator)
+            build_variant visionos-simulator xrsimulator "arm64;x86_64" "$VISIONOS_DEPLOYMENT_TARGET" visionOS
+            ;;
         *)
             echo "Unknown HDF5 platform: $platform" >&2
-            echo "Use HIDEF_HDF5_PLATFORMS='macos ios ios-simulator' to choose slices." >&2
+            echo "Use HIDEF_HDF5_PLATFORMS='macos ios ios-simulator visionos visionos-simulator' to choose slices." >&2
             exit 1
             ;;
     esac

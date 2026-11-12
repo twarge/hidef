@@ -366,6 +366,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				"EXECUTABLE_NAME[sdk=iphoneos*]" = hidef;
 				"EXECUTABLE_NAME[sdk=iphonesimulator*]" = hidef;
+				"EXECUTABLE_NAME[sdk=xros*]" = hidef;
+				"EXECUTABLE_NAME[sdk=xrsimulator*]" = hidef;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Vendor/Build",
@@ -377,10 +379,14 @@
 					"$(PROJECT_DIR)/Vendor/Build/HDF5.xcframework/macos-arm64_x86_64/Headers",
 					"$(PROJECT_DIR)/Vendor/Build/HDF5.xcframework/ios-arm64/Headers",
 					"$(PROJECT_DIR)/Vendor/Build/HDF5.xcframework/ios-arm64_x86_64-simulator/Headers",
+					"$(PROJECT_DIR)/Vendor/Build/HDF5.xcframework/xros-arm64/Headers",
+					"$(PROJECT_DIR)/Vendor/Build/HDF5.xcframework/xros-arm64_x86_64-simulator/Headers",
 				);
 				INFOPLIST_FILE = Resources/Info.plist;
 				"INFOPLIST_FILE[sdk=iphoneos*]" = Resources/iOS/Info.plist;
 				"INFOPLIST_FILE[sdk=iphonesimulator*]" = Resources/iOS/Info.plist;
+				"INFOPLIST_FILE[sdk=xros*]" = Resources/iOS/Info.plist;
+				"INFOPLIST_FILE[sdk=xrsimulator*]" = Resources/iOS/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = HighDeF;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
@@ -393,6 +399,14 @@
 					"@executable_path/Frameworks",
 				);
 				"LD_RUNPATH_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=xros*]" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=xrsimulator*]" = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
@@ -413,13 +427,14 @@
 				PRODUCT_NAME = HighDeF;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
 				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Sources/HiDeF/HiDeF-Bridging-Header.h";
 				SWIFT_SERIALIZE_DEBUGGING_OPTIONS = NO;
 				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 26.0;
 			};
 			name = Debug;
 		};
@@ -436,6 +451,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				"EXECUTABLE_NAME[sdk=iphoneos*]" = hidef;
 				"EXECUTABLE_NAME[sdk=iphonesimulator*]" = hidef;
+				"EXECUTABLE_NAME[sdk=xros*]" = hidef;
+				"EXECUTABLE_NAME[sdk=xrsimulator*]" = hidef;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Vendor/Build",
@@ -446,10 +463,14 @@
 					"$(PROJECT_DIR)/Vendor/Build/HDF5.xcframework/macos-arm64_x86_64/Headers",
 					"$(PROJECT_DIR)/Vendor/Build/HDF5.xcframework/ios-arm64/Headers",
 					"$(PROJECT_DIR)/Vendor/Build/HDF5.xcframework/ios-arm64_x86_64-simulator/Headers",
+					"$(PROJECT_DIR)/Vendor/Build/HDF5.xcframework/xros-arm64/Headers",
+					"$(PROJECT_DIR)/Vendor/Build/HDF5.xcframework/xros-arm64_x86_64-simulator/Headers",
 				);
 				INFOPLIST_FILE = Resources/Info.plist;
 				"INFOPLIST_FILE[sdk=iphoneos*]" = Resources/iOS/Info.plist;
 				"INFOPLIST_FILE[sdk=iphonesimulator*]" = Resources/iOS/Info.plist;
+				"INFOPLIST_FILE[sdk=xros*]" = Resources/iOS/Info.plist;
+				"INFOPLIST_FILE[sdk=xrsimulator*]" = Resources/iOS/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = HighDeF;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
@@ -462,6 +483,14 @@
 					"@executable_path/Frameworks",
 				);
 				"LD_RUNPATH_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=xros*]" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				"LD_RUNPATH_SEARCH_PATHS[sdk=xrsimulator*]" = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
@@ -482,13 +511,14 @@
 				PRODUCT_NAME = HighDeF;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
 				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Sources/HiDeF/HiDeF-Bridging-Header.h";
 				SWIFT_SERIALIZE_DEBUGGING_OPTIONS = NO;
 				SWIFT_VERSION = 6.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 26.0;
 			};
 			name = Release;
 		};

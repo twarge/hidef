@@ -8,7 +8,7 @@ import SwiftUI
 
 #if os(macOS)
 import AppKit
-#elseif os(iOS)
+#elseif os(iOS) || os(visionOS)
 import UIKit
 #endif
 
@@ -436,14 +436,14 @@ struct HDFDocumentSidebarView: View {
     @StateObject private var model: HDFDocumentViewModel
     @ObservedObject private var closeAction: HDFDocumentCloseAction
     @AppStorage(HDFPreferenceKeys.relativeXAxisDisplay) private var usesRelativeXAxisDisplay = true
-    #if os(iOS)
+    #if os(iOS) || os(visionOS)
     @AppStorage("HDFThemePreference") private var themePreferenceRawValue = HDFThemePreference.system.rawValue
     #endif
     private let hasCloseAction: Bool
     // On iPhone (compact width) the split view collapses to one column. Land on the sidebar
     // so opening a document shows the navigation tree instead of the empty root detail view.
     @State private var preferredCompactColumn: NavigationSplitViewColumn = .sidebar
-    #if os(iOS)
+    #if os(iOS) || os(visionOS)
     @State private var csvExportCapMessage: String?
     #endif
 
@@ -456,7 +456,7 @@ struct HDFDocumentSidebarView: View {
     }
 
     var body: some View {
-        #if os(iOS)
+        #if os(iOS) || os(visionOS)
         documentView
             .preferredColorScheme(themePreference.colorScheme)
         #else
@@ -483,7 +483,7 @@ struct HDFDocumentSidebarView: View {
         .frame(minWidth: 860, minHeight: 560)
         .toolbarBackground(.hidden, for: .windowToolbar)
         .focusedSceneValue(\.hdfDatasetCSVExport, csvExportContext)
-        #elseif os(iOS)
+        #elseif os(iOS) || os(visionOS)
         .toolbarTitleDisplayMode(.inline)
         .alert("Could Not Export CSV", isPresented: showsCSVExportCapMessage) {
             Button("OK", role: .cancel) {}
@@ -510,7 +510,7 @@ struct HDFDocumentSidebarView: View {
     }
     #endif
 
-    #if os(iOS)
+    #if os(iOS) || os(visionOS)
     private var showsCSVExportCapMessage: Binding<Bool> {
         Binding {
             csvExportCapMessage != nil
@@ -559,7 +559,7 @@ struct HDFDocumentSidebarView: View {
     }
     #endif
 
-    #if os(iOS)
+    #if os(iOS) || os(visionOS)
     private var themePreference: HDFThemePreference {
         get {
             HDFThemePreference(rawValue: themePreferenceRawValue) ?? .system
@@ -649,7 +649,7 @@ struct HDFDocumentSidebarView: View {
         }
     }
 
-    #if os(iOS)
+    #if os(iOS) || os(visionOS)
     @ToolbarContentBuilder
     private var themeToolbarItem: some ToolbarContent {
         ToolbarItem(placement: .primaryAction) {
@@ -677,7 +677,7 @@ struct HDFDocumentSidebarView: View {
             .navigationTitle("Contents")
         #if os(macOS)
             .navigationSplitViewColumnWidth(min: 240, ideal: 310, max: 420)
-        #elseif os(iOS)
+        #elseif os(iOS) || os(visionOS)
             .toolbarTitleDisplayMode(.inline)
             // Closing and the app theme live on Contents: the screen a collapsed split view
             // (iPhone) opens on and returns to, and the column beside the detail on iPad.
@@ -691,7 +691,7 @@ struct HDFDocumentSidebarView: View {
     @ViewBuilder
     private var detail: some View {
         HDFObjectDetailPanel(model: model)
-        #if os(iOS)
+        #if os(iOS) || os(visionOS)
             // Items that act on the data being viewed travel with the detail column, so
             // they survive the split view collapsing to one column. Reload is here too:
             // it refreshes the data views, not the Contents tree.
@@ -705,7 +705,7 @@ struct HDFDocumentSidebarView: View {
     }
 }
 
-#if os(iOS)
+#if os(iOS) || os(visionOS)
 private enum HDFThemePreference: String, CaseIterable, Identifiable {
     case system
     case dark
@@ -1257,7 +1257,13 @@ private struct HDFObjectDetailPanel: View {
 private extension View {
     @ViewBuilder
     func hdfDocumentNavigationTitle(_ model: HDFDocumentViewModel) -> some View {
-        #if os(iOS)
+        #if os(visionOS)
+        // navigationSubtitle is unavailable on visionOS, so the breadcrumb is omitted there.
+        self
+            .navigationTitle(model.fileName)
+            .navigationDocument(model.file.url)
+            .toolbarTitleDisplayMode(.inline)
+        #elseif os(iOS)
         if model.selectedBreadcrumbTitle.isEmpty {
             self
                 .navigationTitle(model.fileName)
@@ -3603,7 +3609,7 @@ private struct HDFPlotResetControls: View {
     }
 
     // Touch devices need larger hit targets (~44pt); the desktop keeps a compact control.
-    #if os(iOS)
+    #if os(iOS) || os(visionOS)
     private static let iconFont: Font = .title2
     private static let tapTarget: CGFloat? = 44
     private static let spacing: CGFloat = 8
@@ -3822,7 +3828,7 @@ private struct HDFPlotInteractionOverlay: View {
             onZoomSelectionChanged: onZoomSelectionChanged,
             onZoomSelectionEnded: onZoomSelectionEnded
         )
-        #elseif os(iOS)
+        #elseif os(iOS) || os(visionOS)
         HDFIOSPlotInteractionView(
             onPan: onPan,
             onZoom: onZoom,
@@ -4004,7 +4010,7 @@ private final class HDFMacPlotInteractionNSView: NSView {
     }
 
 }
-#elseif os(iOS)
+#elseif os(iOS) || os(visionOS)
 private struct HDFIOSPlotInteractionView: UIViewRepresentable {
     let onPan: (CGSize) -> Void
     let onZoom: (HDFPlotZoom) -> Void

@@ -2,13 +2,13 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import SwiftUI
-#if os(iOS)
+#if os(iOS) || os(visionOS)
 import UIKit
 #endif
 
 @main
 struct HiDeFApp: App {
-    #if os(iOS)
+    #if os(iOS) || os(visionOS)
     @UIApplicationDelegateAdaptor(DemoHDFDocumentBrowserInstaller.self) private var demoDocumentBrowserInstaller
     #endif
 
@@ -22,13 +22,13 @@ struct HiDeFApp: App {
             HDFMacDocumentCommands()
         }
         #endif
-        #if os(iOS)
+        #if os(iOS) || os(visionOS)
         .commands {
             HDFDocumentWindowCommands()
         }
         #endif
 
-        #if os(iOS)
+        #if os(iOS) || os(visionOS)
         DocumentGroupLaunchScene("HighDeF") {
             DefaultDocumentGroupLaunchActions()
             DemoHDFDocumentButton()
@@ -37,7 +37,7 @@ struct HiDeFApp: App {
     }
 }
 
-#if os(iOS)
+#if os(iOS) || os(visionOS)
 private struct HDFDocumentWindowCommands: Commands {
     var body: some Commands {
         // ⌘N opens a new window. iPad shows it as a separate window (Split View / Stage
@@ -267,7 +267,7 @@ private enum HDFAboutPanel {
 }
 #endif
 
-#if os(iOS)
+#if os(iOS) || os(visionOS)
 private struct DemoHDFDocumentButton: View {
     @State private var errorMessage: String?
 
