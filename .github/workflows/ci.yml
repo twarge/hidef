@@ -27,7 +27,7 @@ jobs:
       - uses: actions/checkout@v7
       - name: Verify tracked paths resolve on a case-sensitive filesystem
         run: |
-          test -f HiDeF.xcodeproj/project.pbxproj
+          test -f HiDeF.xcodeproj/project.xcproj
           test -f HiDeF.xcodeproj/xcshareddata/xcschemes/HiDeF.xcscheme
           test -f Resources/AppIcon.icon/icon.json
           test -f Resources/Demo/demo.h5

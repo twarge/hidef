@@ -15,7 +15,7 @@
 #
 # Common overrides:
 #   make CONFIGURATION=Release
-#   make DESTINATION='generic/platform=iOS Simulator' XCODE_FLAGS=CODE_SIGNING_ALLOWED=NO
+#   make DESTINATION='generic/platform=iOS Simulator'
 
 PROJECT          := HiDeF.xcodeproj
 SCHEME           := HiDeF
